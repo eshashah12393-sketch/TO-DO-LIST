@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Premium Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background orbs -->
+  <div class="orb orb--1" aria-hidden="true"></div>
+  <div class="orb orb--2" aria-hidden="true"></div>
+  <div class="orb orb--3" aria-hidden="true"></div>
+
+  <main class="app">
+    <!-- ============ HEADER ============ -->
+    <header class="app__header">
+      <div class="app__brand">
+        <span class="app__logo">◆</span>
+        <div>
+          <h1 class="app__title">TaskFlow</h1>
+          <p class="app__subtitle">SMART TASK MANAGEMENT SYSTEM</p>
+        </div>
+      </div>
+      <div class="app__clock" id="clock" aria-label="Current time"></div>
+    </header>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-label="Task statistics">
+      <div class="stat-card">
+        <span class="stat-card__value" id="count-total">0</span>
+        <span class="stat-card__label">Total</span>
+      </div>
+      <div class="stat-card stat-card--active">
+        <span class="stat-card__value" id="count-active">0</span>
+        <span class="stat-card__label">Active</span>
+      </div>
+      <div class="stat-card stat-card--done">
+        <span class="stat-card__value" id="count-done">0</span>
+        <span class="stat-card__label">Done</span>
+      </div>
+      <div class="stat-card stat-card--high">
+        <span class="stat-card__value" id="count-high">0</span>
+        <span class="stat-card__label">High&nbsp;Pri</span>
+      </div>
+    </section>
+
+    <!-- ============ COMPOSER ============ -->
+    <section class="panel composer">
+      <form id="task-form" autocomplete="off">
+        <div class="composer__row">
+          <input
+            type="text"
+            class="composer__input"
+            id="task-input"
+            placeholder="What needs to be done?"
+            aria-label="New task"
+            maxlength="140"
+          />
+          <button type="submit" class="composer__btn" aria-label="Add task">
+            <span class="composer__btn-icon">+</span>
+            <span class="composer__btn-text">Add Task</span>
+          </button>
+        </div>
+
+        <!-- Priority selector -->
+        <div class="priority-picker" role="radiogroup" aria-label="Task priority">
+          <span class="priority-picker__label">Priority:</span>
+          <label class="prio prio--low">
+            <input type="radio" name="priority" value="low" />
+            <span class="prio__dot"></span>
+            <span class="prio__text">Low</span>
+          </label>
+          <label class="prio prio--medium">
+            <input type="radio" name="priority" value="medium" checked />
+            <span class="prio__dot"></span>
+            <span class="prio__text">Medium</span>
+          </label>
+          <label class="prio prio--high">
+            <input type="radio" name="priority" value="high" />
+            <span class="prio__dot"></span>
+            <span class="prio__text">High</span>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ SEARCH + FILTERS ============ -->
+    <section class="panel toolbar">
+      <div class="search">
+        <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+        </svg>
+        <input
+          type="search"
+          class="search__input"
+          id="search-input"
+          placeholder="Search tasks…"
+          aria-label="Search tasks"
+        />
+      </div>
+
+      <!-- Status tabs -->
+      <div class="tabs" role="tablist" aria-label="Filter by status">
+        <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-filter="active" role="tab" aria-selected="false">Active</button>
+        <button class="tab" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+      </div>
+
+      <!-- Priority filters -->
+      <div class="tabs tabs--prio" role="tablist" aria-label="Filter by priority">
+        <button class="tab tab--prio is-active" data-prio="all" role="tab" aria-selected="true">All Pri</button>
+        <button class="tab tab--prio tab--high" data-prio="high" role="tab" aria-selected="false">High</button>
+        <button class="tab tab--prio tab--medium" data-prio="medium" role="tab" aria-selected="false">Med</button>
+        <button class="tab tab--prio tab--low" data-prio="low" role="tab" aria-selected="false">Low</button>
+      </div>
+    </section>
+
+    <!-- ============ TASK LIST ============ -->
+    <section class="panel list-panel">
+      <ul class="tasks" id="task-list" aria-live="polite"></ul>
+
+      <div class="empty" id="empty-state">
+        <div class="empty__icon">◇</div>
+        <p class="empty__title" id="empty-title">No tasks yet</p>
+        <p class="empty__text" id="empty-text">Add your first task above to get started.</p>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ACTIONS ============ -->
+    <footer class="footer" id="footer" hidden>
+      <span class="footer__info" id="footer-info">0 tasks</span>
+      <div class="footer__actions">
+        <button class="footer__btn" id="clear-completed" type="button">Clear completed</button>
+        <button class="footer__btn footer__btn--danger" id="clear-all" type="button">Clear all</button>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
